@@ -23,7 +23,7 @@
 #     or
 #     curl -L https://raw.githubusercontent.com/GITHUB_ORG_NAME/GITHUB_REPO_NAME/master/installer.sh | sh -s -- --github-repo-name GITHUB_ORG_REPO_NAME --installer-filename FILENAME
 #     or
-#     wget -q -O - https://raw.githubusercontent.com/GITHUB_ORG_NAME/GITHUB_REPO_NAME/installer.sh | sh
+#     wget -nv -O - https://raw.githubusercontent.com/GITHUB_ORG_NAME/GITHUB_REPO_NAME/installer.sh | sh
 #
 # The install wrapper download the latest installer in a temporary directory and executes it.
 # This is useful to allow installers like the ones created via makeself to run their validation
@@ -115,7 +115,7 @@ DESCRIPTION
     or
     curl -fsSL https://raw.githubusercontent.com/GITHUB_ORG_NAME/GITHUB_REPO_NAME/master/${0} | sh -s -- --github-repo-name GITHUB_ORG_REPO_NAME --installer-filename FILENAME
     or
-    wget -q -O - https://raw.githubusercontent.com/GITHUB_ORG_NAME/GITHUB_REPO_NAME/${0} | sh
+    wget -nv -O - https://raw.githubusercontent.com/GITHUB_ORG_NAME/GITHUB_REPO_NAME/${0} | sh
 
     The install wrapper download the latest installer in a temporary directory and executes it. This is useful to allow installers like the ones created via makeself to run their validation (e.g. checksum, decryption or asymmetric signature check).
 
