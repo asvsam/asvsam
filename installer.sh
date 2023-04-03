@@ -235,8 +235,6 @@ ${__INSTALLER_SKIP_SIGNATURE_VALIDATION} || validate_installer_signature "$tmpDi
     || stop_it "Signature validation of Installer failed and we consider it as insecure."
 
 # Run installer
-ls -al /tmp
-ls -al ${tmpDir}
 ${tmpDir}/${__INSTALLER_INSTALLER_FILENAME}
 
 # Cleanup - But should also happen via trap, but better be sure
