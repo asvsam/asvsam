@@ -205,11 +205,11 @@ trap cleanup EXIT INT QUIT TERM
 tmpDir="$(mktemp -d -t ${__INSTALLER_PROJECT_NAME}-installer.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
     || stop_it "Can't create temporary directory for downloading ASV-SAM-Installer")"
 
+ | grep "browser_download_url" | cut -d : -f 2,3 | tr -d \" | sed 's/ //g' | grep "Install.run$"
 # Git latest release of installer file
 INSTALLER_URL=$(curl -sL ${__INSTALLER_GITHUB_RELEASE_URI} \
-    | grep "browser_download_url.*${__INSTALLER_INSTALLER_FILENAME}" \
-    | cut -d : -f 2,3 \
-    | tr -d \")
+    | grep "browser_download_url" \
+    | cut -d : -f 2,3 | tr -d \" | sed 's/ //g' | grep "${__INSTALLER_INSTALLER_FILENAME}$")
 echo "INSTALLER_URL=${INSTALLER_URL}"
 if test "${INSTALLER_URL}" = ""; then
     stop_it "Could not create INSTALLER_URL for latest installer version.
