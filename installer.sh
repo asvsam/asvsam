@@ -210,6 +210,7 @@ INSTALLER_URL=$(curl -sL ${__INSTALLER_GITHUB_RELEASE_URI} \
     | grep "browser_download_url.*${__INSTALLER_INSTALLER_FILENAME}" \
     | cut -d : -f 2,3 \
     | tr -d \")
+echo "INSTALLER_URL=${INSTALLER_URL}"
 if test "${INSTALLER_URL}" = ""; then
     stop_it "Could not create INSTALLER_URL for latest installer version.
 This usually means the config provided to the INSTALL_WRAPPER is not correct (e.g. __INSTALLER_GITHUB_ORG_REPO_NAME, __INSTALLER_GITHUB_RELEASE_URI or __INSTALLER_INSTALLER_FILENAME) or no installer has been released yet on GitHub.
