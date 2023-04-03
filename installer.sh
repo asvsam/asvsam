@@ -206,7 +206,7 @@ tmpDir="$(mktemp -d -t ${__INSTALLER_PROJECT_NAME}-installer.XXXXXXXXXXXXXXXXXXX
     || stop_it "Can't create temporary directory for downloading ASV-SAM-Installer")"
 
 # Git latest release of installer file
-INSTALLER_URL=$(curl -s ${__INSTALLER_GITHUB_RELEASE_URI} \
+INSTALLER_URL=$(curl -sL ${__INSTALLER_GITHUB_RELEASE_URI} \
     | grep "browser_download_url.*${__INSTALLER_INSTALLER_FILENAME}" \
     | cut -d : -f 2,3 \
     | tr -d \")
@@ -217,13 +217,13 @@ Please refer to if: ${__INSTALLER_GITHUB_URI}"
 fi
 
 # Get installer - Download in temp directory
-curl --fail -L ${INSTALLER_URL} -o "$tmpDir/${__INSTALLER_INSTALLER_FILENAME}" \
+curl --fail -sL ${INSTALLER_URL} -o "$tmpDir/${__INSTALLER_INSTALLER_FILENAME}" \
     || stop_it "Could not load latest installer version from ${INSTALLER_URL}. Please refer to: ${__INSTALLER_GITHUB_URI}"
 
 # Get installer gpg signature - Download in temp directory
 INSTALLER_SIG_URL=${INSTALLER_URL}.sig
 ${__INSTALLER_SKIP_SIGNATURE_VALIDATION} || \
-    curl --fail -L ${INSTALLER_SIG_URL} -o "$tmpDir/${__INSTALLER_INSTALLER_SIG_FILENAME}" \
+    curl --fail -sL ${INSTALLER_SIG_URL} -o "$tmpDir/${__INSTALLER_INSTALLER_SIG_FILENAME}" \
         || stop_it "Could not load installer signature from ${INSTALLER_SIG_URL}. Please refer to: ${__INSTALLER_GITHUB_URI}"
 
 # Validate gpg signature of installer
