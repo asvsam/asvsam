@@ -220,6 +220,7 @@ fi
 echo "Download '${INSTALLER_URL}' to temporary file '${__INSTALLER_INSTALLER_FILENAME}' ..."
 curl -fsSL ${INSTALLER_URL} -o "$tmpDir/${__INSTALLER_INSTALLER_FILENAME}" \
     || stop_it "Could not load latest installer version from '${INSTALLER_URL}'. Please refer to: ${__INSTALLER_GITHUB_URI}"
+chmod 700 "$tmpDir/${__INSTALLER_INSTALLER_FILENAME}"
 
 # Get installer gpg signature - Download in temp directory
 INSTALLER_SIG_URL=${INSTALLER_URL}.sig
