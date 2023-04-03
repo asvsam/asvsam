@@ -217,14 +217,17 @@ Please refer to if: ${__INSTALLER_GITHUB_URI}"
 fi
 
 # Get installer - Download in temp directory
+echo "Download '${INSTALLER_URL}' to temporary file '${__INSTALLER_INSTALLER_FILENAME}' ..."
 curl --fail -sL ${INSTALLER_URL} -o "$tmpDir/${__INSTALLER_INSTALLER_FILENAME}" \
-    || stop_it "Could not load latest installer version from ${INSTALLER_URL}. Please refer to: ${__INSTALLER_GITHUB_URI}"
+    || stop_it "Could not load latest installer version from '${INSTALLER_URL}'. Please refer to: ${__INSTALLER_GITHUB_URI}"
 
 # Get installer gpg signature - Download in temp directory
 INSTALLER_SIG_URL=${INSTALLER_URL}.sig
 ${__INSTALLER_SKIP_SIGNATURE_VALIDATION} || \
+    echo "Download '${INSTALLER_SIG_URL}' to temporary file '${__INSTALLER_INSTALLER_SIG_FILENAME}' ..."
+${__INSTALLER_SKIP_SIGNATURE_VALIDATION} || \
     curl --fail -sL ${INSTALLER_SIG_URL} -o "$tmpDir/${__INSTALLER_INSTALLER_SIG_FILENAME}" \
-        || stop_it "Could not load installer signature from ${INSTALLER_SIG_URL}. Please refer to: ${__INSTALLER_GITHUB_URI}"
+        || stop_it "Could not load installer signature from '${INSTALLER_SIG_URL}'. Please refer to: ${__INSTALLER_GITHUB_URI}"
 
 # Validate gpg signature of installer
 ${__INSTALLER_SKIP_SIGNATURE_VALIDATION} || validate_installer_signature "$tmpDir/${__INSTALLER_INSTALLER_FILENAME}" \
